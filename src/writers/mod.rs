@@ -194,7 +194,7 @@ pub trait GraphicsWriter<Color> {
     /// Draws a line from `start` to `end` with the specified `color`.
     fn draw_line(&self, start: Point<isize>, end: Point<isize>, color: Color);
     /// Draws a character at the given `(x, y)` coordinant to the specified `color`.
-    fn draw_character(&self, x: usize, y: usize, character: char, color: Color);
+    fn draw_character(&self, x: usize, y: usize, character: char, color: Color, back_color: Color);
     /// Sets the given pixel at `(x, y)` to the given `color`.
     fn set_pixel(&self, x: usize, y: usize, color: Color);
     /// Sets the graphics device to a `VideoMode`.

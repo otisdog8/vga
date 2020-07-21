@@ -58,7 +58,7 @@ impl GraphicsWriter<u8> for Graphics320x200x256 {
             self.get_frame_buffer().add(offset).write_volatile(color);
         }
     }
-    fn draw_character(&self, x: usize, y: usize, character: char, color: u8) {
+    fn draw_character(&self, x: usize, y: usize, character: char, color: u8, back_color: u8) {
         let character = match font8x8::BASIC_FONTS.get(character) {
             Some(character) => character,
             // Default to a filled block if the character isn't found
@@ -68,7 +68,7 @@ impl GraphicsWriter<u8> for Graphics320x200x256 {
         for (row, byte) in character.iter().enumerate() {
             for bit in 0..8 {
                 match *byte & 1 << bit {
-                    0 => (),
+                    0 => self.set_pixel(x + bit, y + row, back_color),
                     _ => self.set_pixel(x + bit, y + row, color),
                 }
             }
