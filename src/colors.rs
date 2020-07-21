@@ -4,7 +4,7 @@
 pub const PALETTE_SIZE: usize = 768;
 
 /// Represents a 16 bit color used for vga display.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, FromPrimitive)]
 #[repr(u8)]
 pub enum Color16 {
     /// Represents the color `Black (0x0)`.
