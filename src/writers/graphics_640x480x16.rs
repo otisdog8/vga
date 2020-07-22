@@ -71,7 +71,7 @@ impl GraphicsWriter<Color16> for Graphics640x480x16 {
         for (row, byte) in character.iter().enumerate() {
             for bit in 0..8 {
                 match *byte & 1 << bit {
-                    0 => self.set_pixel(x + bit, y + row, back_color),
+                    0 => self._set_pixel(x + bit, y + row, back_color),
                     _ => self._set_pixel(x + bit, y + row, color),
                 }
             }
@@ -102,7 +102,6 @@ impl Graphics640x480x16 {
     pub const fn new() -> Graphics640x480x16 {
         Graphics640x480x16
     }
-
 
     fn set_pixel_no_mode(&self, x: usize, y: usize, color: Color16) {
         self._set_pixel(x, y, color);
