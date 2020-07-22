@@ -77,6 +77,22 @@ impl GraphicsWriter<u8> for Graphics320x200x256 {
             }
         }
     }
+    fn draw_character_fast(&self, x: usize, y: usize, character: char, color: u8) {
+        let character = match font8x8::BASIC_FONTS.get(character) {
+            Some(character) => character,
+            // Default to a filled block if the character isn't found
+            None => font8x8::unicode::BLOCK_UNICODE[8].byte_array(),
+        };
+
+        for (row, byte) in character.iter().enumerate() {
+            for bit in 0..8 {
+                match *byte & 1 << bit {
+                    0 => (),
+                    _ => self.set_pixel(x + bit, y + row, color),
+                }
+            }
+        }
+    }
     fn set_mode(&self) {
         let mut vga = VGA.lock();
         vga.set_video_mode(VideoMode::Mode320x200x256);
