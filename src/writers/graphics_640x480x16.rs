@@ -114,7 +114,7 @@ impl GraphicsWriter<Color16> for Graphics640x480x16 {
 }
 
 impl Graphics640x480x16 {
-    fn draw_different_character(&self, x: usize, y: usize, character: char, character_new: char, color: Color16, back_color: Color16) {
+    pub fn draw_different_character(&self, x: usize, y: usize, character: char, character_new: char, color: Color16, back_color: Color16) {
         let character = match font8x8::BASIC_FONTS.get(character) {
             Some(character) => character,
             // Default to a filled block if the character isn't found
