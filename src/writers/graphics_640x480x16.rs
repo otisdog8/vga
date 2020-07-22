@@ -128,8 +128,8 @@ impl Graphics640x480x16 {
 
         for (row, (byte, byte_new)) in character.iter().zip(character_new.iter()).enumerate() {
             for bit in 0..8 {
-                if (*byte & 1 << bit) {
-                    if (*byte_new & 1 << bit) {
+                if (*byte & 1 << bit) != 0 {
+                    if (*byte_new & 1 << bit) != 0 {
                         ()
                     }
                     else {
@@ -137,7 +137,7 @@ impl Graphics640x480x16 {
                     }
                 }
                 else {
-                    if (*byte_new & 1 << bit) {
+                    if (*byte_new & 1 << bit) != 0 {
                         self._set_pixel(x + bit, y + row, color)
                     }
                     else {
