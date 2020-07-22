@@ -114,6 +114,39 @@ impl GraphicsWriter<Color16> for Graphics640x480x16 {
 }
 
 impl Graphics640x480x16 {
+    fn draw_different_character(&self, x: usize, y: usize, character: char, character_new: char, color: Color16, back_color: Color16) {
+        let character = match font8x8::BASIC_FONTS.get(character) {
+            Some(character) => character,
+            // Default to a filled block if the character isn't found
+            None => font8x8::unicode::BLOCK_UNICODE[8].byte_array(),
+        };
+        let character_new = match font8x8::BASIC_FONTS.get(character_new) {
+            Some(character_new) => character_new,
+            // Default to a filled block if the character isn't found
+            None => font8x8::unicode::BLOCK_UNICODE[8].byte_array(),
+        };
+
+        for (row, (byte, byte_new)) in character.iter().zip(character_new.iter()).enumerate() {
+            for bit in 0..8 {
+                if (*byte & 1 << bit) {
+                    if (*byte_new & 1 << bit) {
+                        ()
+                    }
+                    else {
+                        self._set_pixel(x + bit, y + row, back_color)
+                    }
+                }
+                else {
+                    if (*byte_new & 1 << bit) {
+                        self._set_pixel(x + bit, y + row, color)
+                    }
+                    else {
+                        ()
+                    }
+                }
+            }
+        }
+    }
     /// Creates a new `Graphics640x480x16`.
     pub const fn new() -> Graphics640x480x16 {
         Graphics640x480x16
