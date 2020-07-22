@@ -1,10 +1,10 @@
 //! Common color structures used in vga programming.
-
+use num_enum::TryFromPrimitive;
 /// Represents the size of the vga palette in bytes.
 pub const PALETTE_SIZE: usize = 768;
 
 /// Represents a 16 bit color used for vga display.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, FromPrimitive)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, TryFromPrimitive)]
 #[repr(u8)]
 pub enum Color16 {
     /// Represents the color `Black (0x0)`.
