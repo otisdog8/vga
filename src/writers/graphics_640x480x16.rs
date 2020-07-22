@@ -130,9 +130,9 @@ impl Graphics640x480x16 {
         let frame_buffer = self.get_frame_buffer();
         let offset = x / 8 + y * WIDTH_IN_BYTES;
         let pixel_mask = 0x80 >> (x & 0x07);
-        //VGA.lock()
-        //    .graphics_controller_registers
-        //    .set_bit_mask(pixel_mask);
+        VGA.lock()
+            .graphics_controller_registers
+            .set_bit_mask(pixel_mask);
         unsafe {
             frame_buffer.add(offset).read_volatile();
             frame_buffer.add(offset).write_volatile(u8::from(color));
