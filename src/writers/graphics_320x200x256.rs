@@ -47,6 +47,8 @@ impl GraphicsWriter<u8> for Graphics320x200x256 {
             self.get_frame_buffer().write_bytes(color, Self::SIZE);
         }
     }
+
+
     fn draw_line(&self, start: Point<isize>, end: Point<isize>, color: u8) {
         for (x, y) in Bresenham::new(start, end) {
             self.set_pixel(x as usize, y as usize, color);
@@ -58,6 +60,7 @@ impl GraphicsWriter<u8> for Graphics320x200x256 {
             self.get_frame_buffer().add(offset).write_volatile(color);
         }
     }
+
     fn draw_character(&self, x: usize, y: usize, character: char, color: u8, back_color: u8) {
         let character = match font8x8::BASIC_FONTS.get(character) {
             Some(character) => character,
