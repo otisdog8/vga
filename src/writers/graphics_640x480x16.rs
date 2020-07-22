@@ -132,7 +132,7 @@ impl Graphics640x480x16 {
             .set_write_mode(WriteMode::Mode0);
     }
 
-    fn set_write_mode_2(self) {
+    pub fn set_write_mode_2(self) {
         let mut vga = VGA.lock();
         vga.graphics_controller_registers
             .set_write_mode(WriteMode::Mode2);
