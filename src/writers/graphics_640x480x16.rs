@@ -89,12 +89,16 @@ impl GraphicsWriter<Color16> for Graphics640x480x16 {
                 match *byte & 1 << bit {
                     0 => {
                         for i in 0..scale {
-                            self._set_pixel(x + bit * scale + i, y + row * scale + i, back_color);
+                            for i in 0..scale {
+                                self._set_pixel(x + bit * scale + i, y + row * scale + j, back_color);
+                            }
                         }
                     },
                     _ => {
                         for i in 0..scale {
-                            self._set_pixel(x + bit * scale + i, y + row * scale + i, color);
+                            for j in 0..scale {
+                                self._set_pixel(x + bit * scale + i, y + row * scale + j, color);
+                            }
                         }
                     },
                 }
