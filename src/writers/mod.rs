@@ -197,6 +197,8 @@ pub trait GraphicsWriter<Color> {
     fn draw_character(&self, x: usize, y: usize, character: char, color: Color, back_color: Color);
     /// Draws a character at given coordiates with specified color - doesn't clear background color
     fn draw_character_fast(&self, x: usize, y: usize, character: char, color: Color);
+    /// Draws a character at given coordinates with given scaling 
+    fn draw_character_with_scaling(&self, x: usize, y: usize, scale: usize, character: char, color: Color16, back_color: Color16);
     /// Sets the given pixel at `(x, y)` to the given `color`.
     fn set_pixel(&self, x: usize, y: usize, color: Color);
     /// Sets the graphics device to a `VideoMode`.

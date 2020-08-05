@@ -89,6 +89,22 @@ impl GraphicsWriter<u8> for Graphics320x240x256 {
             }
         }
     }
+    fn draw_character_with_scaling(&self, x: usize, y: usize, scale: usize, character: char, color: Color16, back_color: Color16) {
+        let character = match font8x8::BASIC_FONTS.get(character) {
+            Some(character) => character,
+            // Default to a filled block if the character isn't found
+            None => font8x8::unicode::BLOCK_UNICODE[8].byte_array(),
+        };
+
+        for (row, byte) in character.iter().enumerate() {
+            for bit in 0..8 {
+                match *byte & 1 << bit {
+                    0 => self.set_pixel(x + bit, y + row, back_color),
+                    _ => self.set_pixel(x + bit, y + row, color),
+                }
+            }
+        }
+    }
     fn draw_character_fast(&self, x: usize, y: usize, character: char, color: u8) {
         let character = match font8x8::BASIC_FONTS.get(character) {
             Some(character) => character,
