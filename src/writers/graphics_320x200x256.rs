@@ -77,7 +77,7 @@ impl GraphicsWriter<u8> for Graphics320x200x256 {
             }
         }
     }
-    fn draw_character_with_scaling(&self, x: usize, y: usize, scale: usize, character: char, color: Color16, back_color: Color16) {
+    fn draw_character_with_scaling(&self, x: usize, y: usize, scale: usize, character: char, color: u8, back_color: u8) {
         let character = match font8x8::BASIC_FONTS.get(character) {
             Some(character) => character,
             // Default to a filled block if the character isn't found
